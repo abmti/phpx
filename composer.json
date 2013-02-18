@@ -1,0 +1,27 @@
+{
+	"repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "abmti/phpx",
+                "version": "1.0",
+                "source": {
+                    "url": "http://floricultura.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "trunk/phpseam/codigo/application/"
+                },
+                "autoload": {
+                    "psr-0": { "phpx" : "" }
+                }
+            }
+        }
+    ],
+    "autoload": {
+        "psr-0": { "test": "src/" }
+    },
+	"require": {
+		"doctrine/orm": "2.3.2",
+		"apache/log4php": "2.3.0",
+		"abmti/phpx": "1.0"
+	}
+}
