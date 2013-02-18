@@ -7,3 +7,5 @@ use test\util\TestUtil;
 echo TestUtil::getPath();
 
 echo "Teste";
+
+echo "Teste123";
