@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html"
+	template="/layout/template.xhtml">
+	
+	<ui:define name="pageHeader">Person View</ui:define>
+	
+	<ui:define name="body">
+		<h:form id="personForm">
+			
+				Name:
+				<br /> 
+				<h:outputText id="name" value="#{personBean.person.name}" />
+				
+				<hr />
+				
+				Last Name:
+				<br />
+				<h:outputText id="lastName" value="#{personBean.person.lastName}" />			
+				
+				<hr />
+				
+				Cargo:
+				<br />
+				1 - 
+				<h:outputText id="login" value="#{personBean.person.cargo1.nome}" />
+				<br />
+				2 - 
+				<h:outputText id="login" value="#{personBean.person.cargo2.nome}" />
+				
+				<hr />
+				
+				Login:
+				<br /> 
+				<h:outputText id="login" value="#{personBean.person.login}" />
+				
+				<hr />
+				
+				Password:
+				<br />
+				<h:outputText id="msg" value="xxxxxx" />
+				
+				<hr />
+				
+				Admin? <h:selectBooleanCheckbox id="admin" value="#{personBean.person.admin}" readonly="true" /> 
+				
+				<hr />
+				
+				Msg:
+				<br />
+				<h:outputText id="msg" value="#{personBean.person.msg}" />
+				
+				<hr />
+				
+				<center>
+					<h:commandButton id="done" action="personList" value="Done" immediate="true" />
+				</center>
+			
+			<br />
+		
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

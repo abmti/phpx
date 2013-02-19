@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html"
+	template="/layout/template.xhtml">
+
+	<ui:define name="pageHeader">Person</ui:define>
+
+	<ui:define name="body">
+		
+		<br />
+		
+		<div style="#{personBean.estiloCor}; #{personBean.estiloWidth}">
+			#{personBean.tituloPersonEdit}	
+		</div>	
+		
+		<br />
+		
+		<fieldset>
+			<legend>Form Add Person</legend>
+			<h:form id="helloForm">
+				
+				<script type="text/javascript">
+					alert('Teste');
+				</script>
+			
+				Name: #{personBean.person.name}
+				<br /> 
+				<h:inputText id="name" value="#{personBean.person.name}" label="Name" required="true" styleClass="#{personBean.testeStyleClass}" size="50" />
+				
+				<hr />
+				
+				Last Name:
+				<br />
+				<h:inputText id="lastName" value="#{personBean.person.lastName}" label="Last Name" required="true" size="50" />			
+				
+				<hr />
+				
+				Cargo:
+				<br />
+				1 - 
+				<h:selectOneMenu id="cargo" value="#{personBean.person.cargo1}" converter="php.faces.Entity">
+					<f:selectItems id="itensCargo1" 
+					            value="#{personBean.cargos}" 
+							      var="_cargo1"
+							itemValue="#{_cargo1}"  
+                  		    itemLabel="#{_cargo1.nome}"  
+                  	 noSelectionLabel="Selecione" />
+                  	 <f:ajax event="onchange" ajaxSingle="true" />
+				</h:selectOneMenu>
+				<br />
+				2 - 
+				<h:selectOneRadio id="cargo2" value="#{personBean.person.cargo2}" converter="php.faces.Entity">
+					<f:selectItems id="itensCargo2" 
+					            value="#{personBean.cargos}" 
+							      var="_cargo2"
+							itemValue="#{_cargo2}"  
+                  		    itemLabel="#{_cargo2.nome}"  
+                  	 noSelectionLabel="Selecione" />
+                  	 <f:ajax event="onchange" ajaxSingle="true" />
+				</h:selectOneRadio>
+				
+				<hr />
+				
+				Login:
+				<br /> 
+				<h:inputText id="login" value="#{personBean.person.login}" label="Login" required="true" size="#{personBean.testeSize}" />
+				
+				<hr />
+				
+				Password:
+				<br />
+				<h:inputSecret id="password" value="#{personBean.person.password}" label="Password" required="true" size="10" />
+				
+				<hr />
+				
+				Admin? <h:selectBooleanCheckbox id="admin" value="#{personBean.person.admin}" onchange="alert(this.value + ' - ' + this.checked);" /> 
+				
+				<hr />
+				
+				Msg:
+				<br />
+				<h:inputTextarea id="msgTextArea" value="#{personBean.person.msg}" />
+				
+				<hr />				
+				
+				<center>
+					<h:commandButton id="ajaxAdd" value="Ajax Add">
+						<f:ajax event="onclick" action="#{personBean.ajaxAddPerson}" reRender="helloForm,divMsgs" />
+					</h:commandButton>
+					
+					<h:commandButton id="add" action="#{personBean.addPerson}" value="Add" />
+					
+					<h:commandButton id="cancel" action="personList" value="Cancel" immediate="true" />
+				</center>
+			</h:form>
+		</fieldset>
+
+	</ui:define>
+
+</ui:composition>

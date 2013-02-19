@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html"
+	template="/layout/template.xhtml">
+	
+	<ui:define name="pageTitle">Person List</ui:define>
+	
+	<ui:define name="pageHeader">Person List</ui:define>
+	
+	<ui:define name="body">
+		<h:form id="personAddForm">
+			<h:commandLink id="linkAdd" action="#{personBean.addNewPerson}" value="Add new Person" />
+		</h:form>
+		  
+		<ui:include src="/pages/table.xhtml" />
+		
+		<br />
+		Cargos Disponiveis:
+		<ui:repeat value="#{personBean.cargos}" var="_cargo">
+			<br />
+			<h:outputText value="#{_cargo.nome}" />
+		</ui:repeat>
+		
+	</ui:define>
+	
+</ui:composition>

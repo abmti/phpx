@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://php.net/faces/facelets"
+      xmlns:h="http://php.net/faces/html"
+      xmlns:f="http://php.net/faces/core">
+      
+	<!-- <f:loadBundle basename="resources" var="msg" /> -->
+	<head>
+		<title><ui:insert name="pageTitle">Test PHPX Framework</ui:insert></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		
+		<script type='text/javascript' src="./js/page.js"></script>
+		
+		<script type="text/javascript" src="./js/jquery.maskedinput-1.1.4.pack.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="./css/estilo.css" />	
+		
+	</head>
+	
+	<body bgcolor="#ffffff">
+		<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"	cellspacing="0" border="0" width="99%">
+			<tbody>
+		
+				<tr>
+					<td class="header" height="42" align="left" valign="middle" bgcolor="#E4EBEB">
+					
+						<a href="index.php?faces.view=/pages/home.xhtml" style="text-decoration: none;">
+							<img src="./imagens/logo.png" border="0"/>
+						</a>
+
+						<a href="index.php?faces.action=usuarioHome.consultar">
+							Usuário
+						</a>
+						
+						|
+						
+						<a href="index.php?faces.view=/pages/personList.xhtml">
+							Person
+						</a>
+
+					</td>
+				</tr>
+				<tr>
+					<td height="1" width="100%" bgcolor="#CAD6E0"></td>
+				</tr>
+		
+				<tr>
+					<td width="100%" style="padding: 4px;">
+						<br />
+						<div id="divMsgs">
+							<h:messages id="msgs" style="color: red; font-weight: bold;" globalOnly="false" />
+						</div>
+						<ui:insert name="body">Page Body</ui:insert>
+					</td>
+				</tr>
+		
+				<tr>
+					<td valign="bottom" height="1" width="100%"	bgcolor="#CAD6E0">
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		
+		<div id="dialogAjaxStatus" title="Faces">
+			<center>
+				<h:outputText style="font-size: 16px; font-weight: bold; color: #666; white-space: nowrap;" value="Aguarde..." />
+				<img src="./imagens/ajax-loader.gif" />
+				<h:outputText style="font-size: 10px; font-weight: bold; color: #666; white-space: nowrap;" value="operação em andamento" />
+			</center>
+		</div>
+		
+	</body>
+	
+	<script type="text/javascript">
+
+		$(function(){
+			
+			// Dialog			
+			$('#dialogAjaxStatus').dialog({
+				autoOpen: false,
+				width: 300,
+				height: 100,
+				modal: true
+			});	
+			
+		});
+	
+	</script>
+		
+</html>

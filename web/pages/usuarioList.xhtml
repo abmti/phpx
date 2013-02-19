@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html"
+	template="/layout/template.xhtml">
+
+
+	<ui:define name="body">
+
+		<div id="conteudo" style="width: 95%;">
+		
+			<div class="content"> 
+			
+				<div class="inner" style="width: 99%;">
+					<b>Administrar Usuario</b>
+					<br />
+					<br />
+					<div style="width: 150px; text-align: center;">
+						<a href="index.php?faces.action=usuarioHome.edit">
+							<img src="./imagens/novo.png" border="0" /><br />
+							Novo Usuario
+						</a>
+					</div>
+					<fieldset class="caixa" style="display: none;">
+						<legend>Pesquisa</legend>
+						<form name="pesquisarForm" method="post" action="usuarioList.php">
+							<table cellspacing="2" cellpadding="2" border="0" width="100%;">
+								<tr>
+									<td>
+										<span class="fonteTextoNegrito">Palavra:</span>
+										<input type="text" name="keyword" value="" class="campo" />
+										<input type="submit" name="btnPesquisar" value="Pesquisar" class="btn" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</fieldset>
+					<br />
+					<h:form id="inputTableForm">
+						<h:dataTable id="tableUsuario" value="#{usuarioHome.usuarios}" var="_usuario" cellspacing="2" cellpadding="2" border="0" styleClass="simple">
+							
+							<h:column>
+								<f:facet name="header">
+									Código
+								</f:facet>
+								<h:outputText value="#{_usuario.codigo}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									Nome
+								</f:facet>
+								<h:outputText value="#{_usuario.nome}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									UF
+								</f:facet>
+								<h:outputText value="#{_usuario.uf}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									Login
+								</f:facet>
+								<h:outputText value="#{_usuario.login}" />
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">
+									Perfil
+								</f:facet>
+								<h:outputText value="#{_usuario.perfilLabel}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									Ação
+								</f:facet>
+								<h:commandLink id="linkEdit" action="#{usuarioHome.edit(_usuario.codigo)}" value="Alterar" />
+								|
+								<h:commandLink id="linkEditSenha" action="#{usuarioHome.editSenha(_usuario.codigo)}" value="Alterar Senha" />
+								|
+								<h:commandLink id="linkRemove" action="#{usuarioHome.remove(_usuario.codigo)}" value="Remover" onclick="javascript:return confirm('Deseja realmente excluir?');" />
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+			<div class="footer">
+				<img height="1" width="1" border="0" alt="" src="./imagens/spacer.gif" />		
+			</div>
+		</div>
+		
+	</ui:define>
+
+</ui:composition>	

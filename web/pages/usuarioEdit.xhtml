@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html"
+	template="/layout/template.xhtml">
+
+
+	<ui:define name="body">
+
+		<div id="conteudo" style="width: 95%;">
+		
+			<div class="content">
+			
+				<div class="inner" style="width: 97%;">
+					<b><h:outputText value="#{usuarioHome.tituloEdit}" /></b>
+					<br />	
+					<br />
+					<h:form id="usuarioForm">
+						
+						<div class="field">
+							<span class="name">Código:</span>
+					        <span class="value">
+								<h:inputText id="codigo" value="#{usuarioHome.instance.codigo}" label="Codigo" readonly="true" styleClass="campo" />
+							</span>
+						</div>	
+	
+						<div class="field">
+							<span class="name">Nome:</span>
+					        <span class="value">
+								<h:inputText id="nome" value="#{usuarioHome.instance.nome}" label="Nome" required="true" size="70" styleClass="campo" />
+							</span>
+						</div>
+
+						<div class="field">
+							<span class="name">Estado:</span>
+					        <span class="value">
+								<h:selectOneMenu id="uf" value="#{usuarioHome.instance.uf}" required="true" label="Estado">
+									<f:selectItems id="estados" 
+									            value="#{usuarioHome.estados}" 
+											      var="_uf"
+											itemValue="#{_uf.value}"  
+				                  		    itemLabel="#{_uf.label}"  
+				                  	 noSelectionLabel="Selecione" />
+								</h:selectOneMenu>
+							</span>
+						</div>
+
+						<div class="field">
+							<span class="name">Login:</span>
+					        <span class="value">
+								<h:inputText id="login" value="#{usuarioHome.instance.login}" label="Login" required="true" size="20" styleClass="campo" />
+							</span>
+						</div>
+						
+						<h:htmlText rendered="#{usuarioHome.notManaged}">
+							<div class="field">
+								<span class="name">Senha:</span>
+						        <span class="value">
+									<h:inputSecret id="senha" value="#{usuarioHome.instance.senha}" label="Senha" required="true" size="20" styleClass="campo" />
+								</span>
+							</div>
+						</h:htmlText>
+
+						<div class="field">
+							<span class="name">Status:</span>
+					        <span class="value">
+								<h:selectOneMenu id="status" value="#{usuarioHome.instance.status}" required="true" label="Status">
+									<f:selectItems id="itensStatus" 
+									            value="#{usuarioHome.status}" 
+											      var="_status"
+											itemValue="#{_status.value}"  
+				                  		    itemLabel="#{_status.label}"  
+				                  	 noSelectionLabel="Selecione" />
+								</h:selectOneMenu>
+							</span>
+						</div>
+
+						<div class="field">
+							<span class="name">Perfil:</span>
+					        <span class="value">
+								<h:selectOneMenu id="perfil" value="#{usuarioHome.instance.perfil}" required="true" label="Perfil">
+									<f:selectItems id="perfis" 
+									            value="#{usuarioHome.perfis}" 
+											      var="_perfil"
+											itemValue="#{_perfil.value}"  
+				                  		    itemLabel="#{_perfil.label}"  
+				                  	 noSelectionLabel="Selecione" />
+								</h:selectOneMenu>
+							</span>
+						</div>
+				
+						<div class="field" style="text-align: center;">
+							<br />
+							<h:commandButton id="gravar" action="#{usuarioHome.persist}" value="Gravar" />
+							<h:commandButton id="cancelar" action="usuarioList" value="Cancelar" immediate="true" />
+						</div>
+					
+						<div style="clear:both">
+							<img src="./imagens/required.gif" /> Campos obrigatórios.
+            			</div>
+					
+					</h:form>
+					
+				</div>
+			</div>
+			<div class="footer">
+				<img height="1" width="1" border="0" alt="" src="./imagens/spacer.gif" />		
+			</div>
+		</div>
+		
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://php.net/faces/facelets"
+	xmlns:f="http://php.net/faces/core"
+	xmlns:h="http://php.net/faces/html">
+
+	<div>Persons(DataTable)</div>
+	<h:form id="inputTableForm">
+		<h:dataTable id="tablePerson" value="#{personBean.persons}" var="_person" border="1" width="90%">
+			<h:column>
+				<f:facet name="header">
+					Name
+				</f:facet>
+				<h:outputText value="#{_person.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Last Name
+				</f:facet>
+				<h:outputText value="#{_person.lastName}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Login
+				</f:facet>
+				<h:outputText value="#{_person.login}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Action
+				</f:facet>
+				<h:commandLink id="linkRemove" value="Remove">
+					<f:ajax event="onclick" action="#{personBean.removerPerson(_person.name)}" reRender="tablePerson" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</ui:composition>
