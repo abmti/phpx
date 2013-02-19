@@ -1,0 +1,121 @@
+<?php
+
+namespace phpx\util;
+
+use IteratorAggregate;
+
+/**
+ * Define a interface de uma coleção de objetos
+ * @author              João Batista Neto
+ * @package             rpo
+ * @subpackage  util
+ * @category    list
+ */
+interface Collection extends IteratorAggregate {
+
+	/**
+	 * Retorna um objeto da lista
+	 * @param $o
+	 * @return boolean
+	 */
+	public function get($index);
+	
+	/**
+	 * Adiciona um novo objeto na lista
+	 * @param $key
+	 * @param $o
+	 * @return boolean
+	 */
+	public function add($o, $key = null);
+
+	/**
+	 * Adiciona todos os objetos de uma coleção nessa coleção
+	 * @param Collection $c
+	 * @return boolean
+	 */
+	public function addAll(Collection $c);
+	
+	/**
+	 * Adiciona todos os objetos de uma coleção nessa coleção
+	 * @param Collection $c
+	 * @return boolean
+	 */
+	public function addAllArray(array $arrayList);
+
+	/**
+	 * Limpa a coleção atual deixando-a sem nenhum elemento
+	 * @return boolean
+	 * @see Collection::isEmpty()
+	 */
+	public function clear();
+
+	/**
+	 * Verifica se a coleção atual pussui um determinado objeto
+	 * @param$o
+	 * @return boolean
+	 */
+	public function contains($o);
+
+	/**
+	 * Verifica se a coleção atual possui todos os objetos de outra coleção
+	 * @param Collection $c
+	 * @return boolean
+	 */
+	public function containsAll(Collection $c);
+
+	/**
+	 * Verifica se a coleção atual é igual a outro objeto
+	 * @param $o
+	 * @return boolean
+	 */
+	public function equals($o);
+
+	/**
+	 * Recupera um hash para identificação da coleção
+	 * @return string
+	 * @see Object::hashCode()
+	 */
+	public function hashCode();
+
+	/**
+	 * Verifica se a coleção está vazia
+	 * @return boolean
+	 * @see Collection::clear()
+	 */
+	public function isEmpty();
+
+	/**
+	 * Remove um elemento da coleção
+	 * @param $o
+	 * @return boolean
+	 */
+	public function remove($o);
+
+	/**
+	 * Remove todos os objetos de uma outra coleção da coleção atual
+	 * @param Collection $c
+	 * @return boolean
+	 */
+	public function removeAll( Collection $c );
+
+	/**
+	 * Mantém na coleção apenas os elementos existentes na coleção especificada
+	 * @param Collection $c
+	 * @return boolean
+	 */
+	public function retainAll( Collection $c );
+
+	/**
+	 * Recupera a quantidade de elementos da coleção
+	 * @return int
+	 */
+	public function size();
+	
+	/**
+	 * Recupera uma matriz contendo os elementos da coleção
+	 * @return array
+	 */
+	public function toArray();
+	
+	
+}

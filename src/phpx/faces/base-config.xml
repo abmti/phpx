@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config xmlns:phpfaces="http://php.net/faces">
+
+	<!-- DTD reference: http://www.horstmann.com/corejsf/faces-config.html -->
+
+	<!-- renderer: (description*, display-name*, icon*, component-family, renderer-type, 
+		renderer-class, attribute*, supported-component-type*, supported-component-class*, 
+		renderer-extension*) -->
+	<!-- render-kit: (description*, display-name*, icon*, render-kit-id?, render-kit-class?, 
+		renderer*) -->
+
+
+	<!-- ==================================================================== 
+		HTML Render Kit ==================================================================== -->
+
+	<render-kit>
+
+		<render-kit-id>HTML_BASIC</render-kit-id>
+		<render-kit-class>phpx\faces\renderkit\HtmlRenderKitImpl</render-kit-class>
+
+		<renderer>
+			<component-family>php.faces.ViewRoot</component-family>
+			<renderer-type>php.faces.ViewRoot</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\UIViewRootRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.Html</component-family>
+			<renderer-type>php.faces.Text</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\TextRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.Input</component-family>
+			<renderer-type>php.faces.Text</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\TextRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.SelectOne</component-family>
+			<renderer-type>php.faces.Menu</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\MenuRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.SelectOne</component-family>
+			<renderer-type>php.faces.Radio</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\RadioRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.SelectBoolean</component-family>
+			<renderer-type>php.faces.Checkbox</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\CheckboxRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Output</component-family>
+			<renderer-type>php.faces.Text</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\TextRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.Command</component-family>
+			<renderer-type>php.faces.Button</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\ButtonRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Command</component-family>
+			<renderer-type>php.faces.Link</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\LinkRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.Form</component-family>
+			<renderer-type>php.faces.Form</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\FormRenderer</renderer-class>
+		</renderer>
+
+		<renderer>
+			<component-family>php.faces.Messages</component-family>
+			<renderer-type>php.faces.Messages</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\MessagesRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Data</component-family>
+			<renderer-type>php.faces.Table</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\TableRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Ajax</component-family>
+			<renderer-type>php.faces.Ajax</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\AjaxRenderer</renderer-class>
+		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Repeat</component-family>
+			<renderer-type>php.faces.Repeat</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\RepeatRenderer</renderer-class>
+		</renderer>
+
+	</render-kit>
+	
+	<converter>
+    	<converter-id>php.faces.Date</converter-id>
+    	<converter-class>phpx\faces\convert\DateConverter</converter-class>
+  	</converter>
+	
+	<converter>
+    	<converter-id>php.faces.DateTime</converter-id>
+    	<converter-class>phpx\faces\convert\DateTimeConverter</converter-class>
+  	</converter>
+  	
+  	<converter>
+    	<converter-id>php.faces.Entity</converter-id>
+    	<converter-class>phpx\faces\convert\EntityConverter</converter-class>
+  	</converter>
+
+
+	<!-- ==================================================================== 
+		Base components ==================================================================== -->
+	<component>
+		<component-type>php.faces.ViewRoot</component-type>
+		<component-class>phpx\faces\component\UIViewRoot</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Html</component-type>
+		<component-class>phpx\faces\component\UIHtml</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Input</component-type>
+		<component-class>phpx\faces\component\UIInput</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.SelectOne</component-type>
+		<component-class>phpx\faces\component\UISelectOne</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.SelectBoolean</component-type>
+		<component-class>phpx\faces\component\UISelectBoolean</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Output</component-type>
+		<component-class>phpx\faces\component\UIOutput</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.Command</component-type>
+		<component-class>phpx\faces\component\UICommand</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Form</component-type>
+		<component-class>phpx\faces\component\UIForm</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Message</component-type>
+		<component-class>phpx\faces\component\UIMessage</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Messages</component-type>
+		<component-class>phpx\faces\component\UIMessages</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Graphic</component-type>
+		<component-class>phpx\faces\component\UIGraphic</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Panel</component-type>
+		<component-class>phpx\faces\component\UIPanel</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Data</component-type>
+		<component-class>phpx\faces\component\UIData</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Column</component-type>
+		<component-class>phpx\faces\component\UIColumn</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.SelectItems</component-type>
+		<component-class>phpx\faces\component\UISelectItems</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Ajax</component-type>
+		<component-class>phpx\faces\component\UIAjax</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Repeat</component-type>
+		<component-class>phpx\faces\component\UIRepeat</component-class>
+	</component>
+	
+	
+
+	<!-- ==================================================================== 
+		HTML components ==================================================================== -->
+
+	<component>
+		<component-type>php.faces.HtmlText</component-type>
+		<component-class>phpx\faces\component\html\HtmlText</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlCommandButton</component-type>
+		<component-class>phpx\faces\component\html\HtmlCommandButton</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlCommandLink</component-type>
+		<component-class>phpx\faces\component\html\HtmlCommandLink</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlInputText</component-type>
+		<component-class>phpx\faces\component\html\HtmlInputText</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlInputSecret</component-type>
+		<component-class>phpx\faces\component\html\HtmlInputSecret</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlInputTextarea</component-type>
+		<component-class>phpx\faces\component\html\HtmlInputTextarea</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlInputRich</component-type>
+		<component-class>phpx\faces\component\html\HtmlInputRich</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlSelectOneMenu</component-type>
+		<component-class>phpx\faces\component\html\HtmlSelectOneMenu</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlSelectOneRadio</component-type>
+		<component-class>phpx\faces\component\html\HtmlSelectOneRadio</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlSelectBooleanCheckbox</component-type>
+		<component-class>phpx\faces\component\html\HtmlSelectBooleanCheckbox</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlInputHidden</component-type>
+		<component-class>phpx\faces\component\html\HtmlInputHidden</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlOutputText</component-type>
+		<component-class>phpx\faces\component\html\HtmlOutputText</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlForm</component-type>
+		<component-class>phpx\faces\component\html\HtmlForm</component-class>
+	</component>
+
+	<component>
+		<component-type>php.faces.HtmlMessages</component-type>
+		<component-class>phpx\faces\component\html\HtmlMessages</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlDataTable</component-type>
+		<component-class>phpx\faces\component\html\HtmlDataTable</component-class>
+	</component>
+	
+	<component>
+		<component-type>php.faces.HtmlColumn</component-type>
+		<component-class>phpx\faces\component\html\HtmlColumn</component-class>
+	</component>
+	
+</faces-config>

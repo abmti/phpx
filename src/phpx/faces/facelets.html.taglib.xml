@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib xmlns:phpfaces="urn:php-faces">
+    
+    <namespace>http://php.net/faces/html</namespace>
+
+	<tag>
+        <tag-name>htmlText</tag-name>
+        <component>
+            <component-type>php.faces.HtmlText</component-type>
+        </component>
+    </tag>
+
+    <tag>
+        <tag-name>form</tag-name>
+        <component>
+            <component-type>php.faces.HtmlForm</component-type>
+        </component>
+    </tag>
+	
+	<tag>
+        <tag-name>inputText</tag-name>
+        <component>
+            <component-type>php.faces.HtmlInputText</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>inputSecret</tag-name>
+        <component>
+            <component-type>php.faces.HtmlInputSecret</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>inputHidden</tag-name>
+        <component>
+            <component-type>php.faces.HtmlInputHidden</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>inputTextarea</tag-name>
+        <component>
+            <component-type>php.faces.HtmlInputTextarea</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>inputRich</tag-name>
+        <component>
+            <component-type>php.faces.HtmlInputRich</component-type>
+        </component>
+    </tag>
+			
+	<tag>
+        <tag-name>commandButton</tag-name>
+        <component>
+            <component-type>php.faces.HtmlCommandButton</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>commandLink</tag-name>
+        <component>
+            <component-type>php.faces.HtmlCommandLink</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>outputText</tag-name>
+        <component>
+            <component-type>php.faces.HtmlOutputText</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>selectOneMenu</tag-name>
+        <component>
+            <component-type>php.faces.HtmlSelectOneMenu</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>selectOneRadio</tag-name>
+        <component>
+            <component-type>php.faces.HtmlSelectOneRadio</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>selectBooleanCheckbox</tag-name>
+        <component>
+            <component-type>php.faces.HtmlSelectBooleanCheckbox</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>messages</tag-name>
+        <component>
+            <component-type>php.faces.HtmlMessages</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>dataTable</tag-name>
+        <component>
+            <component-type>php.faces.HtmlDataTable</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>column</tag-name>
+        <component>
+            <component-type>php.faces.HtmlColumn</component-type>
+        </component>
+    </tag>
+    
+</facelet-taglib>
