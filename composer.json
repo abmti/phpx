@@ -17,11 +17,9 @@
         }
     ],
     "autoload": {
-        "psr-0": { "test": "src/" }
+        "psr-0": { "test": "src/", "phpx": "src/" }
     },
 	"require": {
-		"doctrine/orm": "2.3.2",
-		"apache/log4php": "2.3.0",
-		"abmti/phpx": "1.0"
+		"apache/log4php": "2.3.0"
 	}
 }
