@@ -1,7 +1,5 @@
-<?php
+<?php 
 
-require_once 'vendor/autoload.php';
+header("Location: web/index.php?faces.view=/pages/home.xhtml");
 
-use test\util\TestUtil;
-
-echo TestUtil::getPath();
+?>

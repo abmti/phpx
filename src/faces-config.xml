@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config>
+
+	<application>
+		<view-handler>phpx\faces\application\FaceletsViewHandler</view-handler>
+		<navigation-handler>phpx\faces\application\NavigationHandlerImpl</navigation-handler>
+	</application>
+
+	<!-- Usuário -->
+
+	<managed-bean>
+		<managed-bean-name>usuarioHome</managed-bean-name>
+		<managed-bean-class>test\application\UsuarioHome</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>usuarioList</from-outcome>
+			<to-view-id>/pages/usuarioList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>usuarioEdit</from-outcome>
+			<to-view-id>/pages/usuarioEdit.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	
+	<!-- Person -->
+
+	<managed-bean>
+		<managed-bean-name>personBean</managed-bean-name>
+		<managed-bean-class>test\beans\PersonBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>personList</from-outcome>
+			<to-view-id>/pages/personList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>personEdit</from-outcome>
+			<to-view-id>/pages/personEdit.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>personView</from-outcome>
+			<to-view-id>/pages/personView.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

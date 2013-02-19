@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence>
+		
+	<persistence-unit name="phpTest">   
+    	<properties>
+    		<property name="config.autoGenerateProxyClasses" value="true" />
+			<property name="config.pathEntities" value="test/domain/entity" />
+			<property name="config.cacheClass" value="\phpx\util\Cache" />
+    		<property name="connection.driver" value="pdo_mysql"/>
+			<property name="connection.dbname" value="test"/>
+			<property name="connection.user" value="root"/>
+			<property name="connection.password" value=""/>			
+			<property name="connection.host" value="127.0.0.1"/>
+		</properties>	
+	</persistence-unit>
+	
+</persistence>
