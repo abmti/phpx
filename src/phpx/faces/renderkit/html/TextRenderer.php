@@ -18,7 +18,6 @@ use phpx\faces\context\FacesContext;
 use phpx\faces\component\html\HtmlOutputText;
 use Exception;
 use Logger;
-use CuteEditor;
 
 class TextRenderer extends HtmlBasicRenderer {
 	

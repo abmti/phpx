@@ -2,6 +2,8 @@
 
 ini_set("display_errors", true );
 ini_set("html_errors", true);
+ini_set("memory_limit","512M");
+error_reporting(E_ALL ^ E_NOTICE);
 
 require_once("../vendor/autoload.php");
 

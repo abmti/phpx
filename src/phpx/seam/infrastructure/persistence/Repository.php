@@ -55,7 +55,7 @@ abstract class Repository {
 	}
 	
 	/**
-	 * 
+	 * Teste
 	 * @return Doctrine\ORM\EntityManager
 	 */
 	public abstract function getEntityManager();
