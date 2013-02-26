@@ -17,7 +17,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "test": "src/", "phpx": "src/" }
+        "psr-0": { "test" : "src/", "phpx" : "src/", "" : "vendor/others/" }
     },
 	"require": {
 		"apache/log4php": "2.3.0"

@@ -105,24 +105,13 @@ class TextRenderer extends HtmlBasicRenderer {
 	}
 	
 	protected function renderInputRich(FacesContext $context, UIComponent $component) {
+		$id = $component->getClientId($context);
+		$this->renderInputTextarea($context, $component);
 		$writer = $context->getResponseWriter();
-		
-		$editor = new CuteEditor();
-		$editor->ID = $component->getClientId($context);
-		$editor->Text= parent::getFormattedValue($context, $component);
-		$editor->EditorBodyStyle="font:normal 12px arial;";
-		$editor->EditorWysiwygModeCss="php.css";
-		$editor->CustomCulture = "pt-br";
-		$type = "Simple";
-		if($component->getType() != null){
-			$type = $component->getType();	
-		}
-		$editor->AutoConfigure = $type;
-		$editor->ThemeType = "Office2003";
-		$editor->AbsoluteImageGalleryPath = realpath("../") . "/upload/";
-		$editor->ImageGalleryPath = "/enfoc/upload/";
-		
-		$writer->writeRaw($editor->GetString());		
+		$writer->startElement("script");
+		$js = "$('#$id').ckeditor();";
+		$writer->writeRaw($js);
+		$writer->endElement();
 	}
 	
 	protected function renderOutput(FacesContext $context, UIComponent $component) {

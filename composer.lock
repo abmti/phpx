@@ -1,5 +1,5 @@
 {
-    "hash": "d43e6024aa83c56f4acf08e3643fb9ca",
+    "hash": "48a724f56cc407f2dfc901763d492cff",
     "packages": [
         {
             "name": "apache/log4php",
@@ -12,9 +12,7 @@
             "require": {
                 "php": ">=5.2.7"
             },
-            "time": "2012-10-26 09:13:25",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "src/main/php/"
@@ -29,7 +27,8 @@
                 "log",
                 "logging",
                 "php"
-            ]
+            ],
+            "time": "2012-10-26 09:13:25"
         }
     ],
     "packages-dev": null,

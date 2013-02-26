@@ -56,7 +56,6 @@ abstract class Repository {
 	
 	/**
 	 * 
-	 * Enter description here ...
 	 * @return Doctrine\ORM\EntityManager
 	 */
 	public abstract function getEntityManager();
