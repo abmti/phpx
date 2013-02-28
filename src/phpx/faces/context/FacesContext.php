@@ -2,7 +2,7 @@
 
 namespace phpx\faces\context;
 
-use phpx\faces\config\FacesConfigManagedBeanConfigEntry;
+use phpx\faces\config\ManagedBeanConfigEntry;
 
 use phpx\util\ArrayList;
 
@@ -149,7 +149,7 @@ class FacesContext {
 	}
 	*/
 	
-	public function registerBean(FacesConfigManagedBeanConfigEntry $bean) {
+	public function registerBean(ManagedBeanConfigEntry $bean) {
 		$this->beanContext->put($bean->name, $bean);
 	}
 	

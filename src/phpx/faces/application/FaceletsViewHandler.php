@@ -9,7 +9,7 @@ use phpx\faces\renderkit\html\UIViewRootRenderer;
 use phpx\faces\renderkit\html\FacesXHTML;
 use phpx\faces\render\RenderKitFactory;
 use phpx\faces\component\html\HtmlText;
-use phpx\faces\config\FacesTaglib;
+use phpx\faces\config\Taglib;
 use phpx\faces\component\html\HtmlOutputText;
 use phpx\faces\el\ValueExpression;
 use phpx\faces\component\UIComponent;
@@ -27,9 +27,9 @@ class FaceletsViewHandler extends ViewHandler {
 
 	public function __construct() {
 		$this->taglibs = array();
-		$this->taglibs[0] = new FacesTaglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.html.taglib.xml");
-		$this->taglibs[1] = new FacesTaglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.ui.taglib.xml");
-		$this->taglibs[2] = new FacesTaglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.core.taglib.xml");
+		$this->taglibs[0] = new Taglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.html.taglib.xml");
+		$this->taglibs[1] = new Taglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.ui.taglib.xml");
+		$this->taglibs[2] = new Taglib(Path::getInstance()->getPath("PATH_PHPX")."/phpx/faces/facelets.core.taglib.xml");
 	}
 	
 	

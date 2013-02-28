@@ -2,7 +2,7 @@
 
 namespace phpx\faces\config;
 
-class FacesConfigNavigationRuleConfigEntry {
+class NavigationRuleConfigEntry {
 	
 	public $fromViewId;
 	public $toViewId;

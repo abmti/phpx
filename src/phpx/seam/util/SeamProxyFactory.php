@@ -5,6 +5,8 @@ namespace phpx\seam\util;
 /**
  * @author Adriano Borges
  */
+use phpx\di\InjectorFactory;
+
 use phpx\seam\util\annotation\In;
 use Doctrine\Common\Annotations\AnnotationReader;
 use phpx\util\Path;
@@ -146,7 +148,8 @@ class SeamProxyFactory {
 					$size = count($paths) - 1;
 					$newName = $paths[$size];
 		
-					$newInstance = $this->getProxy($newPath);
+					//$newInstance = $this->getProxy($newPath);
+					$newInstance = InjectorFactory::getInjector()->getInstance($newPath);
 						
 					$setMethod = "set".$newName;
 						

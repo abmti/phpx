@@ -2,7 +2,7 @@
 
 namespace phpx\faces\config;
 
-class FacesConfigRenderKitEntry {
+class RenderKitConfigEntry {
 	
 	public $id;
 	public $class;

@@ -3,7 +3,7 @@
 namespace phpx\faces\renderkit\html;
 
 use phpx\util\ArrayList;
-use phpx\faces\config\FacesConfigManagedBeanConfigEntry;
+use phpx\faces\config\ManagedBeanConfigEntry;
 use phpx\faces\component\UISelectItems;
 use phpx\faces\component\UIComponent;
 use phpx\faces\context\FacesContext;
@@ -76,7 +76,7 @@ class MenuRenderer extends HtmlBasicRenderer {
 			 	foreach ($items as $key => $item){
 					$instance = $item;
 	            	$aliasInstance = $child->getVar();
-	            	$entry = new FacesConfigManagedBeanConfigEntry();
+	            	$entry = new ManagedBeanConfigEntry();
 	            	$entry->scope = FacesContext::SCOPE_REQUEST;
 	            	$entry->name = $aliasInstance;
 	            	$entry->class = get_class($instance);
@@ -106,7 +106,7 @@ class MenuRenderer extends HtmlBasicRenderer {
 			 	}
 				
             	$aliasInstance = $component->getClientId($context);
-            	$entry = new FacesConfigManagedBeanConfigEntry();
+            	$entry = new ManagedBeanConfigEntry();
             	$entry->scope = FacesContext::SCOPE_SESSION;
             	$entry->name = $aliasInstance;
             	$entry->class = get_class($listaSession);

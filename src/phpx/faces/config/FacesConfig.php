@@ -8,7 +8,6 @@ use Exception;
 
 class FacesConfig {
 	
-	/** @deprecated */
 	public $path;
 	
 	public $requireFiles;
@@ -124,7 +123,7 @@ class FacesConfig {
 						
 						case "component": 
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
-								$componentEntry = new FacesConfigComponentEntry();
+								$componentEntry = new ComponentConfigEntry();
 							} else if( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 								$this->componentEntries[] = $componentEntry;
 								$componentEntry = null;
@@ -160,7 +159,7 @@ class FacesConfig {
 						
 						case "converter": 
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
-								$converterEntry = new FacesConfigConverterEntry();
+								$converterEntry = new ConverterConfigEntry();
 							} else if( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 								$this->converterEntries[] = $converterEntry;
 								$converterEntry = null;
@@ -194,7 +193,7 @@ class FacesConfig {
 						
 						case "render-kit": 
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
-								$renderKitEntry = new FacesConfigRenderKitEntry();
+								$renderKitEntry = new RenderKitConfigEntry();
 							} else if( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 								$this->renderKitEntries[] = $renderKitEntry;
 								$renderKitEntry = null;
@@ -227,7 +226,7 @@ class FacesConfig {
 						case "renderer":
 							if( $renderKitEntry != null ) {
 								if( $configXml->nodeType == XMLReader::ELEMENT ) {
-									$rendererEntry = new FacesConfigRendererEntry();
+									$rendererEntry = new RendererConfigEntry();
 								} else if( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 									$renderKitEntry->renderers[] = $rendererEntry;
 									$rendererEntry  = null;
@@ -300,7 +299,7 @@ class FacesConfig {
 							
 						case "managed-bean":
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
-								$managedBean = new FacesConfigManagedBeanConfigEntry();
+								$managedBean = new ManagedBeanConfigEntry();
 							} else if( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 								$this->managedBeans[] = $managedBean;
 								$managedBean = null;
@@ -335,7 +334,7 @@ class FacesConfig {
 							
 						case "navigation-rule":
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
-								$navRule = new FacesConfigNavigationRuleConfigEntry();
+								$navRule = new NavigationRuleConfigEntry();
 							} else if ( $configXml->nodeType == XMLReader::END_ELEMENT ) {
 								$this->navigationRules[] = $navRule;
 								$navRule = null;

@@ -8,7 +8,7 @@ use phpx\util\ArrayList;
 
 use phpx\faces\event\PhaseId;
 
-use phpx\faces\config\FacesConfigManagedBeanConfigEntry;
+use phpx\faces\config\ManagedBeanConfigEntry;
 
 use phpx\faces\context\FacesContext;
 
@@ -327,7 +327,7 @@ class UIData extends UIComponentBase implements NamingContainer {
             } else {
             	if($this->isRowAvailable()){
             		$instance = $this->getRowData();
-            		$entry = new FacesConfigManagedBeanConfigEntry();
+            		$entry = new ManagedBeanConfigEntry();
             		$entry->scope = FacesContext::SCOPE_REQUEST;
             		$entry->name = $this->var;
             		$entry->class = get_class($instance);

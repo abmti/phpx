@@ -1,6 +1,5 @@
 
 function AjaxSeam(form, options) {
-	//alert('Teste');
 	if(options["status"]){
 		$('#dialogAjaxStatus').dialog('open');
 	}

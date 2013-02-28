@@ -118,16 +118,13 @@ class ValueExpression {
 			return array($baseExp, null);
 		}
 		$scopeContext = $elContext->getContext($entry->scope);
-		if($scopeContext == null) {
-			$teste = "Teste";
-		}
 		$object = $scopeContext->get($baseExp);
-		$factory = new SeamProxyFactory();
 		if($object == null) {
 			$object = InjectorFactory::getInjector()->getInstance($entry->class);
 			$scopeContext->put($baseExp, $object);
 		} else {
 			if($object instanceof Proxy) {
+				$factory = new SeamProxyFactory();
 				$factory->generateProxy($entry->class, $object);
 			}
 		}

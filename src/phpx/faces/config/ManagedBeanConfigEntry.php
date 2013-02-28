@@ -2,7 +2,7 @@
 
 namespace phpx\faces\config;
 
-class FacesConfigManagedBeanConfigEntry {
+class ManagedBeanConfigEntry {
 	
 	public $name;
 	public $class;

@@ -2,11 +2,10 @@
 
 namespace phpx\faces\config;
 
-class FacesConfigConverterEntry {
+class ComponentConfigEntry {
 	
-	public $id;
+	public $type;
 	public $class;
-	
 }
 
 ?>
