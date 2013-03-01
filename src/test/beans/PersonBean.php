@@ -9,8 +9,8 @@ use phpx\faces\application\FacesMessage;
 use phpx\faces\context\FacesContext;
 
 /**
- * @Home("personBean")
- * @Scope("session") 
+ * @phpx\inject\Named("personBean")
+ * @phpx\enterprise\context\SessionScoped
  */
 class PersonBean {
 	

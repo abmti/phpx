@@ -1,13 +1,11 @@
 <?php
 namespace phpx\seam\util\annotation;
 
-use Doctrine\ORM\Mapping\Annotation;
-
 /**
  * @Annotation
  * @Target("PROPERTY")
  */
-final class In implements Annotation {
+final class In {
 	
 	/** @var string */
 	public $targetClass;

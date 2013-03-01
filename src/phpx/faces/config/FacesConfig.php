@@ -29,9 +29,7 @@ class FacesConfig {
 	 * @param $path string the path to the config file
 	 */
 	public function __construct( $path = null ) {
-		// backwards compat
 		$this->path = $path;
-		
 		$this->requireFiles = array();
 		$this->managedBeans = array();
 		$this->navigationRules = array();
@@ -41,32 +39,23 @@ class FacesConfig {
 		$this->componentEntries = array();
 		$this->converterEntries = array();
 		$this->renderKitEntries = array();
- 		
 		$this->logger = Logger::getLogger(__CLASS__);
-		
-		if( $path != null ) {
-			$this->logger->warn( "You are creating FacesConfig with a deprecated constructor. Please update your code to pass the config file(s) into the parse method." );
-		}
-		
 	}
 	
 	/**
 	 * Parse the file given in the constructor
 	 */
-	public function parse( $path = null ) {
+	public function parse($path = null) {
 		if(!file_exists($path)) {
 			throw new Exception("Supplied config file does not exist: ". $path);
 		}
 		$this->logger->debug("Parsing ".$path);
 
-		$configXml = new FacesConfigXMLReader();
+		$configXml = new XMLReader();
 		$openSuccess = $configXml->open($path);
-		//$configXml->setParserProperty(2,true); // This seems a little unclear to me - but it worked :)
-		 
-		if( !$openSuccess ) {
+		if(!$openSuccess) {
 			throw new Exception("Could not open config file " . $path);
 		}
-		
 		$isInConfig = false;
 		$isInLifecycle = false;
 		$componentEntry = null;

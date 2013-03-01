@@ -2,7 +2,7 @@
 
 namespace phpx\faces\el;
 
-use phpx\di\InjectorFactory;
+use phpx\inject\InjectorFactory;
 use phpx\seam\util\Proxy;
 use phpx\seam\util\SeamProxyFactory;
 use phpx\seam\util\SeamProxy;

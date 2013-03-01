@@ -10,8 +10,8 @@ use test\domain\entity\Usuario;
 use phpx\seam\application\EntityHome;
 
 /**
- * @Home("usuarioHome")
- * @SessionScoped 
+ * @phpx\inject\Named("usuarioHome")
+ * @phpx\enterprise\context\SessionScoped
  */
 class UsuarioHome extends EntityHome { 
     

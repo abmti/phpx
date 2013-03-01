@@ -2,15 +2,14 @@
 
 namespace phpx\seam\util;
 
-/**
- * @author Adriano Borges
- */
-use phpx\di\InjectorFactory;
-
+use phpx\inject\InjectorFactory;
 use phpx\seam\util\annotation\In;
 use Doctrine\Common\Annotations\AnnotationReader;
 use phpx\util\Path;
 
+/**
+ * @author Adriano Borges
+ */
 class SeamProxyFactory {
 	
 	private $_proxyNamespace = "php\\proxies";

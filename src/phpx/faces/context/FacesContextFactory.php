@@ -2,6 +2,8 @@
 
 namespace phpx\faces\context;
 
+use phpx\faces\config\ManagedBeanConfigEntry;
+
 use phpx\util\Cache;
 
 use phpx\faces\render\RenderKitFactory;
@@ -26,7 +28,7 @@ class FacesContextFactory {
 	 * @return phpx\faces\context\FacesContextFactory
 	 */
 	public static function getInstance() {
-		if( self::$factory == null ) {
+		if(self::$factory == null) {
 			self::setInstance(new FacesContextFactory());	
 		}
 		return self::$factory;	
@@ -51,7 +53,6 @@ class FacesContextFactory {
 			$facesContext->setRenderResponse(false);
 			$facesContext->setResponseComplete(false);
 			$facesContext->setViewRoot(null);
-			
 			FacesContext::setCurrentInstance($facesContext);
 		}
 		return FacesContext::getCurrentInstance();
@@ -159,7 +160,17 @@ class FacesContextFactory {
 		}
 		Cache::getInstance()->save('_renderKitFactory', $rkf);
 		
+		//
+		// Setup ManagedBeans
+		//
 		foreach($config->getManagedBeans() as $managedBean) {
+			$facesContext->registerBean($managedBean);
+		}
+		
+		//
+		// Setup AnnotationsManagedBeans
+		//
+		foreach($this->getManagedBeanAnnotations() as $managedBean) {
 			$facesContext->registerBean($managedBean);
 		}
 		
@@ -175,6 +186,33 @@ class FacesContextFactory {
 		return $facesContext;
 	}
 	
+	private function getManagedBeanAnnotations() {
+		$beans = array();
+		$driver = new \phpx\seam\util\PhpDriver();
+		$classes = $driver->getAllClassNames(array(realpath("../")."/src"));
+		$reader = new \Doctrine\Common\Annotations\SimpleAnnotationReader();
+		foreach ($classes as $key => $class) {
+			try {
+				$reflectionClass = new \ReflectionClass($class);
+				$named = $reader->getClassAnnotation($reflectionClass, 'phpx\inject\Named');
+				if($named != null) {
+					$bean = new ManagedBeanConfigEntry();
+					$bean->name = $named->value;
+					$bean->class = $reflectionClass->getName();
+					$session = $reader->getClassAnnotation($reflectionClass, 'phpx\enterprise\context\SessionScoped');
+					if($session != null) {
+						$bean->scope = "session";
+					} else {
+						$bean->scope = "request";
+					}
+					$beans[] = $bean;
+				}
+			} catch (Exception $e) {
+				//echo $e->getMessage() . "<br />";
+			}
+		}
+		return $beans;
+	}
 	
 }
 

@@ -13,8 +13,8 @@ class InjectorModule extends AbstractModule {
      * @see Ray\Di.AbstractModule::configure()
      */
     protected function configure() {
-        $this->bindInterceptor($this->matcher->any(), $this->matcher->any(), array(new Timer));
-        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Ray\Sample\Annotation\Transactional'), array(new Transaction));
+        $this->bindInterceptor($this->matcher->any(), $this->matcher->any(), array(new \Ray\Sample\Timer));
+        $this->bindInterceptor($this->matcher->any(), $this->matcher->annotatedWith('Ray\Sample\Annotation\Transactional'), array(new \Ray\Sample\Transaction));
     }
     
 }
