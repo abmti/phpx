@@ -1,5 +1,5 @@
 <?php
-namespace phpx\di;
+namespace phpx\inject;
 
 use phpx\util\Cache;
 use Ray\Di\Definition;

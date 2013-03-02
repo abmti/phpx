@@ -1,6 +1,6 @@
 <?php
 
-namespace phpx\di;
+namespace phpx\inject;
 
 use Ray\Di\AbstractModule,
     Ray\Di\Scope,
