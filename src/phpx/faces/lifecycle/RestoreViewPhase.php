@@ -14,7 +14,6 @@ use phpx\faces\el\ValueExpression;
 use phpx\faces\component\UIComponent;
 use phpx\util\ArrayList;
 use phpx\faces\context\FacesContext;
-use phpx\faces\util\Util;
 use phpx\faces\event\PhaseId;
 use Exception;
 
@@ -90,7 +89,7 @@ class RestoreViewPhase extends Phase {
 			}
 		} 
 		
-		$viewHandler = Util::getViewHandler($facesContext);
+		$viewHandler = $facesContext->getApplication()->getViewHandler();
 
         $isPostBack = ($this->isPostback($viewId) && !$this->isErrorPage($facesContext));
         if ($isPostBack) {

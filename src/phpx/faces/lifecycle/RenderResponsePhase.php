@@ -3,7 +3,6 @@
 namespace phpx\faces\lifecycle;
 
 use phpx\faces\context\FacesContext;
-use phpx\faces\util\Util;
 use phpx\faces\event\PhaseId;
 use phpx\faces\exception\FacesException;
 use Exception;
@@ -54,7 +53,7 @@ class RenderResponsePhase extends Phase {
             }
 			*/
             //render the view
-            $viewHandler = Util::getViewHandler($facesContext);
+            $viewHandler = $facesContext->getApplication()->getViewHandler();
             $viewHandler->renderView($facesContext, $facesContext->getViewRoot());
 
             //display results of message display LOGGER

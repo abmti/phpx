@@ -11,7 +11,7 @@ class LoggerAppenderFile extends \LoggerAppenderDailyFile {
 	 */
 	public function doAppend(\LoggerLoggingEvent $event) {
 		if($this->closed || !$this->fp) {
-			$this->activateOptions();
+			$this->openFile();
 		}
 		parent::doAppend($event);
 	}

@@ -40,6 +40,11 @@ class Taglib {
 		return $this->tags;
 	}
 	
+	/**
+	 * 
+	 * @param string $tagName
+	 * @return phpx\faces\config\TaglibEntry
+	 */
 	public function lookupTag($tagName) {
 		foreach( $this->tags as $tag ) {
 			if( $tag->getName() == $tagName ) {

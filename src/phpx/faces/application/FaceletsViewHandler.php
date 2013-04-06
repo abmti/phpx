@@ -2,10 +2,13 @@
 
 namespace phpx\faces\application;
 
+use phpx\util\ArrayList;
+
+use phpx\faces\config\TaglibEntry;
+
+use phpx\util\NewXmlReader;
 use phpx\util\Path;
-
 use phpx\faces\renderkit\html\UIViewRootRenderer;
-
 use phpx\faces\renderkit\html\FacesXHTML;
 use phpx\faces\render\RenderKitFactory;
 use phpx\faces\component\html\HtmlText;
@@ -173,65 +176,182 @@ class FaceletsViewHandler extends ViewHandler {
 		return $viewRoot;
 	} 
 	
-	
-	protected function getTablibForNamespace( $namespace ) {
-		foreach( $this->taglibs as $taglib ) {
-			if( $taglib->getNamespace() == $namespace ) {
+	/**
+	 * 
+	 * @param unknown_type $namespace
+	 * @return phpx\faces\config\Taglib
+	 */
+	protected function getTablibForNamespace($namespace) {
+		foreach($this->taglibs as $taglib) {
+			if($taglib->getNamespace() == $namespace) {
 				return $taglib;
 			}
 		}
 	}
 	
 	
-	
-	public function renderView(FacesContext $facesContext, UIViewRoot $viewToRender ) {
-
+	public function renderView(FacesContext $facesContext, UIViewRoot $viewToRender) {
 		$writer = new XMLWriter();
 		$writer->openMemory();
 		$facesContext->setResponseWriter($writer);
-		
 		$writer->startDocument('1.0', 'UTF-8');
 		$writer->setIndent(TRUE);
-		$writer->text('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">');		
-		$viewSource = $this->getViewSource($viewToRender->getViewId());
-		$viewToRender = $this->buildView($facesContext, $viewToRender, $viewSource, null);
+		$writer->text('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">');
+		$viewToRender->getChildren()->clear();
+		$viewToRender = $this->buildChildrenView($facesContext, $viewToRender, $viewToRender->getViewId());
 		UIViewRootRenderer::encodeRecursive($facesContext, $viewToRender);
 		$writer->endDocument();
-		$output = $writer->outputMemory( true );
+		$output = $writer->outputMemory(true);
 		$output = $this->includeResources($output);
-		header("Content-Type: text/html; charset=ISO-8859-1",true);
+		header("Content-Type: text/html; charset=ISO-8859-1", true);
 		echo $output;
-		
-		//$outputStream = $facesContext->getExternalContext()->getResponse()->getOutputStream();
-		//fwrite( $outputStream, $output );
-		//fflush( $outputStream );
-		//fclose( $outputStream );
 	}
 	
+	private function buildChildrenView(FacesContext $facesContext, UIComponent $viewToRender, $viewId) { 
+		
+		$application = $facesContext->getApplication();
+		
+		$viewSource = $this->getViewSource($viewId);
+		$xml = new NewXmlReader();
+		$xml->XML($viewSource, FacesXHTML::ENCODING);
+		$xml->setParserProperty(4, false);
+		
+		while($xml->read()) {
+
+			$taglib = $this->getTablibForNamespace($xml->getNamespaceURI());
+			if($taglib != null) {
+				$tag = $taglib->lookupTag($xml->getLocalName());
+				if($tag == null) {
+					throw new Exception("Tag " . $xml->getLocalName() . " not found.");
+				}
+				if ($xml->nodeType == XMLReader::ELEMENT) {
+					if($xml->namespaceURI == "http://php.net/faces/facelets") {
+						$this->buildChildrenViewFacelts($facesContext, $xml, $viewToRender, $taglib, $tag);
+					}
+					else if($xml->namespaceURI == "http://php.net/faces/html") {
+						$this->buildChildrenViewHtml($facesContext, $xml, $viewToRender, $taglib, $tag);
+					}
+				}
+				
+			} else {
+				
+			}
+			
+			
+			
+		}
+		return $viewToRender;
+	}
 	
-	private function buildView( FacesContext $facesContext, UIComponent $viewToRender, $viewSource, $viewComposite ) {
+	private function buildChildrenViewFacelts(FacesContext $facesContext, NewXmlReader $xml, UIComponent $viewToRender, Taglib $tagLib, TaglibEntry $tag) {
+		$application = $facesContext->getApplication();
+		if($xml->nodeType == XMLReader::ELEMENT) {
+			if($tag->getName() == "composition") {
+				$viewIdTemplate = $attrs = $xml->getAttribute("template");
+				$viewRoot = $application->createComponent("php.faces.ViewRoot");
+				$viewRoot->setRenderKitId($facesContext->getRenderKitId());
+				$viewRoot->setViewId($viewIdTemplate);
+				$viewRoot = $this->buildChildrenView($facesContext, $viewRoot, $viewIdTemplate);
+				$viewToRender->getChildren()->add($viewRoot);
+			}
+		}
+	}
+	
+	private function buildChildrenViewHtml(FacesContext $facesContext, NewXmlReader $xml, UIComponent $viewToRender, Taglib $tagLib, TaglibEntry $tag) {
+		$application = $facesContext->getApplication();
+		if($xml->nodeType == XMLReader::ELEMENT) {
+			$component = $this->buildComponent($facesContext, $xml, $viewToRender, $tagLib, $tag);
+			$viewToRender->getChildren()->add($component);
+		}
+	}
+	
+	private function buildComponent(FacesContext $facesContext, NewXmlReader $xml, UIComponent $currentComponent, Taglib $tagLib, TaglibEntry $tag) {
+		$application = $facesContext->getApplication();
+		if($xml->nodeType == XMLReader::ELEMENT) {
+			// lookup the component type
+			$componentType = $tag->getComponentType();
+			$componentEntries = $application->getComponents();
+			$componentClass = $componentEntries[$componentType];
+				
+			// create the component if we can
+			$newComponent = null;
+			if( class_exists( $componentClass )
+					&& (($newComponent = new $componentClass) instanceof UIComponent) ) {
+		
+				// add the component to the tree
+				$newComponent->setParent( $currentComponent );
+		
+				// set the component's attributes
+				if( $xml->hasAttributes ) {
+					while( $xml->moveToNextAttribute() ) {
+						$attributeName = $xml->name;
+						$value = utf8_decode($xml->value);
+		
+						if(ValueExpression::isEl($value)) {
+							$ve = new ValueExpression($value, null);
+							$newComponent->setValueExpression($attributeName, $ve);
+						}else{
+							$setterName = "set" . ucfirst($attributeName);
+							if( method_exists($newComponent, $setterName)) {
+								call_user_func( array( $newComponent, $setterName ), $value );
+							}else{
+								throw new Exception("O método " . $setterName . " não existe na classe " . $componentClass);
+							}
+						}
+					}
+					$xml->moveToElement();
+				}
+		
+				// increment the component level and add this to the stack
+				//$componentLevel++;
+				//$componentStack[$componentLevel] = $newComponent;
+		
+				//if($facetName == null){
+				//	$currentComponent->getChildren()->add($newComponent);
+				//}else{
+				//	$currentComponent->putFacet($facetName, $newComponent);
+				//}
+				
+			}
+			return $newComponent;
+		}
+		return null;
+	}
+	
+	private function buildView(FacesContext $facesContext, UIComponent $viewToRender, $viewSource, $viewComposite) {
 		
 		$viewToRender->getChildren()->clear();
 		$application = $facesContext->getApplication();
 		
 		$xml = new XMLReader();
 		$xml->XML($viewSource, FacesXHTML::ENCODING);
-		$xml->setParserProperty(2,true); // This seems a little unclear to me - but it worked :)
+		$xml->setParserProperty(4, false);
 
 		$componentStack[] = array();
 		$componentLevel = 0;
 		$componentStack[$componentLevel] = $viewToRender;
 		$ignoreValue = false;
-		$closeTagIgnore = null;
+		$emptyTag = null;
 		$facetName = null;
 		$htmlText = null;
 		
 		while( $xml->read() ) {
 			
-			if($xml->name == $closeTagIgnore && $xml->nodeType == XMLReader::END_ELEMENT) {
-				$closeTagIgnore = null;
-				continue;
+			if($emptyTag != null) {
+				$str = "";
+				if($htmlText == null){
+					$htmlText = new HtmlText();
+				} else {
+					if($htmlText->getValue() != null){
+						$str = $htmlText->getValue();
+					}
+				}
+				if(!($emptyTag == $xml->name && $xml->nodeType == XMLReader::END_ELEMENT) ) {
+					$str = substr($str, 0, strlen($str)-1);
+					$str .= " />";
+				}
+				$htmlText->setValue($str);
+				$emptyTag = null;
 			}
 			
 			$currentComponent = $componentStack[$componentLevel];
@@ -285,6 +405,7 @@ class FaceletsViewHandler extends ViewHandler {
 								break;
 								
 							case "insert":
+								$xml->readInnerXml();
 								if($viewComposite != null){
 									$viewSource = $this->getViewSource($viewComposite);
 									if(isset($viewSource)){
@@ -417,9 +538,11 @@ class FaceletsViewHandler extends ViewHandler {
 							$str = $htmlText->getValue();
 						}
 					}
-	
 					if (in_array ( $xml->nodeType, array (XMLReader::TEXT, XMLReader::CDATA, XMLReader::WHITESPACE, XMLReader::SIGNIFICANT_WHITESPACE ) )) {
 						$str .= $this->getTextValue($xml->value);
+					}
+					else if ($xml->nodeType == XMLReader::COMMENT) {
+						$str .= $this->getTextValue($xml->readOuterXml());
 					}
 					else if ($xml->nodeType == XMLReader::ELEMENT){
 						$nameTag = $xml->name;
@@ -431,16 +554,20 @@ class FaceletsViewHandler extends ViewHandler {
 								$str .= " " . $attributeName . "=\"" . $value . "\""; 
 							}	
 						}
-						if($xml->isEmptyElement || strlen($xml->readInnerXml()) == 0){
-							$closeTagIgnore = $nameTag;
-							if($nameTag == "script") {
-								$str .= "></".$nameTag.">";
-							} else {
-								$str .= " />";
-							}
-						}else{
-							$str .= ">";
+						if($nameTag == 'br') {
+							$xml->readOuterXml();
+							$xml->readInnerXml();
+							$teste = "";
 						}
+						if($nameTag == 'div') {
+							$xml->readOuterXml();
+							$xml->readInnerXml();
+							$teste = "";
+						}
+						if(strlen($xml->readInnerXml()) == 0){
+							$emptyTag = $nameTag;
+						}
+						$str .= ">";
 					}
 					else if ($xml->nodeType == XMLReader::END_ELEMENT) {
 						$str .= "</" . $xml->name . ">";
@@ -463,19 +590,32 @@ class FaceletsViewHandler extends ViewHandler {
 	}
 	
 
-	private function getNodeViewSouce( $viewSource, $namespace, $nodeName, $atrribute, $nameAtrribute ) {
-		
-		$dom = new DOMDocument(FacesXHTML::XML_VERSION, FacesXHTML::ENCODING);
-		$dom->loadXML($viewSource);
-		
-		$nodes = $dom->getElementsByTagNameNS($namespace, $nodeName);
-		foreach ($nodes as $element){
-			if($element->getAttribute($atrribute) == $nameAtrribute){
-				$docTemp = new DOMDocument(FacesXHTML::XML_VERSION, FacesXHTML::ENCODING);
-    			$docTemp->appendChild($docTemp->importNode($element,true));       
-    			return $docTemp->saveXML(); 
+	private function getNodeViewSouce($viewSource, $namespace, $nodeName, $atrribute, $nameAtrribute ) {
+		$xml = new XMLReader();
+		$xml->XML($viewSource, FacesXHTML::ENCODING);
+		$xml->setParserProperty(4, false);
+		while( $xml->read() ) {
+			$taglib = $this->getTablibForNamespace( $xml->namespaceURI );
+			if( $taglib != null ) {
+				$tag = $taglib->lookupTag( $xml->localName );
+				if( $tag != null ) {
+					if($xml->namespaceURI == $namespace){
+						if( $tag->getName() == $nodeName) {
+							if( $xml->nodeType == XMLReader::ELEMENT ) {
+								if( $xml->hasAttributes ) {
+									while( $xml->moveToNextAttribute() ) {
+										if($xml->name == $atrribute && $xml->value == $nameAtrribute){
+											return $this->getTextValue($xml->readOuterXml());
+										}
+									}
+									$xml->moveToElement();
+								}
+							}
+						}
+					}
+				}
 			}
-		}
+		}	
 		return null;
 	}
 	

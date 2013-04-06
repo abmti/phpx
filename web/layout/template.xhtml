@@ -4,7 +4,6 @@
       xmlns:h="http://php.net/faces/html"
       xmlns:f="http://php.net/faces/core">
       
-	<!-- <f:loadBundle basename="resources" var="msg" /> -->
 	<head>
 		<title><ui:insert name="pageTitle">Test PHPX Framework</ui:insert></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -18,6 +17,18 @@
 	</head>
 	
 	<body bgcolor="#ffffff">
+		
+		<h:outputText value="TESTEEEEE" />
+		
+		<h:dataTable id="tabela" value="#{usuarioHome.usuarios}" var="_usuario">
+			<h:column>
+				<f:facet name="header">
+					Código
+				</f:facet>
+				<h:outputText value="#{_usuario.codigo}" />
+			</h:column>
+		</h:dataTable>
+	
 		<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"	cellspacing="0" border="0" width="99%">
 			<tbody>
 		

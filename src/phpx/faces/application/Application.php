@@ -20,6 +20,10 @@ class Application {
 		$this->actionListener = new ActionListenerImpl();
 	}
 	
+	/**
+	 * 
+	 * @return phpx\faces\application\ViewHandler
+	 */
 	public function getViewHandler() {
 		return $this->viewHandler;	
 	}
