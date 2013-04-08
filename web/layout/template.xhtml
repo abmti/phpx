@@ -20,35 +20,24 @@
 		
 		<h:outputText value="TESTEEEEE" />
 		
-		<h:dataTable id="tabela" value="#{usuarioHome.usuarios}" var="_usuario">
-			<h:column>
-				<f:facet name="header">
-					Código
-				</f:facet>
-				<h:outputText value="#{_usuario.codigo}" />
-			</h:column>
-		</h:dataTable>
-	
 		<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"	cellspacing="0" border="0" width="99%">
 			<tbody>
 		
 				<tr>
 					<td class="header" height="42" align="left" valign="middle" bgcolor="#E4EBEB">
-					
-						<a href="index.php?faces.view=/pages/home.xhtml" style="text-decoration: none;">
-							<img src="./imagens/logo.png" border="0"/>
-						</a>
+						<h:form id="menuForm">
+							<h:commandLink id="linkHome" action="home">
+								<img src="./imagens/logo.png" border="0" />	
+							</h:commandLink>
 
-						<a href="index.php?faces.action=usuarioHome.consultar">
-							Usuário
-						</a>
-						
-						|
-						
-						<a href="index.php?faces.view=/pages/personList.xhtml">
-							Person
-						</a>
-
+							<h:commandLink id="linkHome" action="#{usuarioHome.consultar}">
+								Usuário	
+							</h:commandLink>
+							|
+							<a href="index.php?faces.view=/pages/personList.xhtml">
+								Person
+							</a>
+						</h:form>
 					</td>
 				</tr>
 				<tr>

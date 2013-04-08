@@ -6,6 +6,10 @@
     
     <namespace>http://php.net/faces/core</namespace>
 
+	<tag>
+        <tag-name>view</tag-name>
+    </tag>
+
     <tag>
         <tag-name>facet</tag-name>
     </tag>
@@ -23,5 +27,5 @@
             <component-type>php.faces.Ajax</component-type>
         </component>
     </tag>
-	
+    
 </facelet-taglib>
