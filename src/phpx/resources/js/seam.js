@@ -23,8 +23,8 @@ function AjaxSeam(form, options) {
 			params,
 			function(data){
 				
-				var string = (new XMLSerializer()).serializeToString(data);
-				alert(string);
+				//var string = (new XMLSerializer()).serializeToString(data);
+				//alert(string);
 		
 				var reRenders = options['reRender'];
 				if(reRenders != null){
