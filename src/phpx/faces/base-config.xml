@@ -102,6 +102,12 @@
 			<renderer-type>php.faces.Repeat</renderer-type>
 			<renderer-class>phpx\faces\renderkit\html\RepeatRenderer</renderer-class>
 		</renderer>
+		
+		<renderer>
+			<component-family>php.faces.Facelets</component-family>
+			<renderer-type>php.faces.Facelets</renderer-type>
+			<renderer-class>phpx\faces\renderkit\html\FaceletsRenderer</renderer-class>
+		</renderer>
 
 	</render-kit>
 	
@@ -192,8 +198,18 @@
 		<component-type>php.faces.Repeat</component-type>
 		<component-class>phpx\faces\component\UIRepeat</component-class>
 	</component>
-	
-	
+	<component>
+		<component-type>php.faces.Define</component-type>
+		<component-class>phpx\faces\component\UIDefine</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Insert</component-type>
+		<component-class>phpx\faces\component\UIInsert</component-class>
+	</component>
+	<component>
+		<component-type>php.faces.Facet</component-type>
+		<component-class>phpx\faces\component\UIFacet</component-class>
+	</component>
 
 	<!-- ==================================================================== 
 		HTML components ==================================================================== -->

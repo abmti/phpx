@@ -12,6 +12,9 @@
 
     <tag>
         <tag-name>facet</tag-name>
+        <component>
+            <component-type>php.faces.Facet</component-type>
+        </component>
     </tag>
     
     <tag>

@@ -138,9 +138,6 @@ class TextRenderer extends HtmlBasicRenderer {
 		}
 	}
 	
-	
-	
-	
 }
 
 ?>

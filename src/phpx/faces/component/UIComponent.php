@@ -11,10 +11,10 @@ use Exception;
 abstract class UIComponent {
 	
 	// Liss<String> atributos do componente
-	protected $attributes;
+	private $attributes;
 	
 	// Mapa de ValueExpression
-	protected $bindings;    
+	private $bindings;    
 	
 	public abstract function encodeBegin($facesContext);
 	public abstract function encodeEnd($facesContext);

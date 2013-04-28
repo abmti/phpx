@@ -12,6 +12,9 @@
 	
 	<tag>
         <tag-name>define</tag-name>
+        <component>
+            <component-type>php.faces.Define</component-type>
+        </component>
     </tag>
 	
 	<tag>
@@ -20,6 +23,9 @@
     
     <tag>
         <tag-name>insert</tag-name>
+        <component>
+            <component-type>php.faces.Insert</component-type>
+        </component>
     </tag>
     
     <tag>

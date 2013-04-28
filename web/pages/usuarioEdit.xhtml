@@ -53,14 +53,14 @@
 							</span>
 						</div>
 						
-						<h:htmlText rendered="#{usuarioHome.notManaged}">
+						<h:outputText rendered="#{usuarioHome.notManaged}">
 							<div class="field">
 								<span class="name">Senha:</span>
 						        <span class="value">
 									<h:inputSecret id="senha" value="#{usuarioHome.instance.senha}" label="Senha" required="true" size="20" styleClass="campo" />
 								</span>
 							</div>
-						</h:htmlText>
+						</h:outputText>
 
 						<div class="field">
 							<span class="name">Status:</span>

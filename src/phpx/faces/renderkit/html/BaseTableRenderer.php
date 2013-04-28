@@ -150,7 +150,7 @@ abstract class BaseTableRenderer extends HtmlBasicRenderer {
                                         UIComponent $table,
                                         XMLWriter $writer) {
 			
-            $writer->startElement("tbody");
+            //$writer->startElement("tbody");
             //writer.writeText("\n", table, null);
 			
     }
@@ -166,7 +166,7 @@ abstract class BaseTableRenderer extends HtmlBasicRenderer {
     protected function renderTableBodyEnd(FacesContext $context,
                                       UIComponent $table,
                                       XMLWriter $writer) {
-		$writer->endElement();
+		//$writer->endElement();
         //writer.writeText("\n", table, null);
 		
     }

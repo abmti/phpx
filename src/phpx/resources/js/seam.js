@@ -22,13 +22,18 @@ function AjaxSeam(form, options) {
 	jQuery.post(url, 
 			params,
 			function(data){
+				
+				var string = (new XMLSerializer()).serializeToString(data);
+				alert(string);
+		
 				var reRenders = options['reRender'];
 				if(reRenders != null){
 					for(key in reRenders) {
 						var reRender = reRenders[key];
 						$(data).find("#"+reRender).each(function (index, domEle) {
 					        // domEle == this
-							//alert($(domEle).attr('id'));
+							alert($(domEle).attr('id'));
+							alert($(domEle).html());
 							$(document).find('#'+reRender).html($(domEle).html());
 					    });
 					}

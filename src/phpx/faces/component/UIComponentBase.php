@@ -21,17 +21,17 @@ abstract class UIComponentBase extends UIComponent {
 		
 	}
 	
-	protected $transient;
-	protected $id;
-	protected $clientId;
-	protected $parent;
-	protected $rendered;
-	protected $rendererType;
+	private $transient;
+	private $id;
+	private $clientId;
+	private $parent;
+	private $rendered;
+	private $rendererType;
 	
-	protected $facets;
-	protected $children;
-	protected $listeners;
-	protected $ajax;
+	private $facets;
+	private $children;
+	private $listeners;
+	private $ajax;
 	
 	public function getFacets() {
 		if( $this->facets == null ) {
@@ -179,7 +179,7 @@ abstract class UIComponentBase extends UIComponent {
 				$namingContainer = $this->getNamingContainer();
 			}
 			
-			$logger->debug( "naming container: ".UIComponent::toString( $namingContainer ) );
+			//$logger->debug( "naming container: ".UIComponent::toString( $namingContainer ) );
 			
 			
 			
@@ -196,7 +196,7 @@ abstract class UIComponentBase extends UIComponent {
 				$child = $this->getChildById( $exprParts[0] );
 			}
 			
-			$logger->debug( "child = ".UIComponent::toString( $child ) );
+			//$logger->debug( "child = ".UIComponent::toString( $child ) );
 			
 			return $child;
 		} catch( Exception $e ) {
