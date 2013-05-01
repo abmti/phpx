@@ -16,13 +16,13 @@ class AjaxRenderer extends HtmlBasicRenderer {
 		$idClient = $parent->getClientId($context);
 		$formName = $component->getNamingForm();
 		$event = "parameters:{'param1':'".$idClient."'}";
-		if($component->getReRender() != null) {
+		if($component->getUpdate() != null) {
 			$renders = array();
-			$renders1 = explode(",", $component->getReRender());
+			$renders1 = explode(",", $component->getUpdate());
 			foreach ($renders1 as $key => $render) {
-				$renders[] = "render".$key.":'".trim($render)."'";
+				$renders[] = "update".$key.":'".trim($render)."'";
 			}
-			$event .= ", reRender:{". implode(",", $renders) ."}";
+			$event .= ", update:{". implode(",", $renders) ."}";
 		}
 		$event .= ", parentId:'".$idClient."_parent'";
 		$event .= ", ajaxSingle:".Boolean::valueOfString($component->isAjaxSingle());
@@ -32,13 +32,13 @@ class AjaxRenderer extends HtmlBasicRenderer {
 			$onComplete = str_replace("'", "\\'", $onComplete);
 			$event .= ", onComplete:'".$onComplete."'";
 		}
-		$ajax = "AjaxSeam('".$formName."', { ".$event." } ); return false;";
-		$getterName = "get".ucfirst($component->getEvent());
+		$ajax = "ajaxPhpx('".$formName."', { ".$event." } ); return false;";
+		$getterName = "getOn".ucfirst($component->getEvent());
 		$eventComponent = call_user_func(array($parent, $getterName ), null);
 		if($eventComponent != null) {
 			$ajax = $eventComponent . " " . $ajax;
 		}
-		$setterName = "set".ucfirst($component->getEvent());
+		$setterName = "setOn".ucfirst($component->getEvent());
 		call_user_func(array($parent, $setterName ), $ajax);
 	}
 	

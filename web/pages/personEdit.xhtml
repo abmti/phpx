@@ -47,7 +47,7 @@
 							itemValue="#{_cargo1}"  
                   		    itemLabel="#{_cargo1.nome}"  
                   	 noSelectionLabel="Selecione" />
-                  	 <f:ajax event="onchange" ajaxSingle="true" />
+                  	 <f:ajax event="change" ajaxSingle="true" />
 				</h:selectOneMenu>
 				<br />
 				2 - 
@@ -58,7 +58,7 @@
 							itemValue="#{_cargo2}"  
                   		    itemLabel="#{_cargo2.nome}"  
                   	 noSelectionLabel="Selecione" />
-                  	 <f:ajax event="onchange" ajaxSingle="true" />
+                  	 <f:ajax event="change" ajaxSingle="true" />
 				</h:selectOneRadio>
 				
 				<hr />
@@ -87,7 +87,7 @@
 				
 				<center>
 					<h:commandButton id="ajaxAdd" value="Ajax Add">
-						<f:ajax event="onclick" action="#{personBean.ajaxAddPerson}" reRender="helloForm,divMsgs" />
+						<f:ajax event="click" action="#{personBean.ajaxAddPerson}" update="helloForm,divMsgs" />
 					</h:commandButton>
 					
 					<h:commandButton id="add" action="#{personBean.addPerson}" value="Add" />

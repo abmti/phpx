@@ -2,6 +2,8 @@
 
 namespace phpx\faces\application;
 
+use phpx\util\Cache;
+
 use phpx\faces\component\UIFacet;
 
 use phpx\faces\component\UIForm;
@@ -59,7 +61,19 @@ class FaceletsViewHandler extends ViewHandler {
 	public function restoreView(FacesContext $facesContext, $viewId) {
 		$viewRoot = $this->createView($facesContext, $viewId);
 		$application = $facesContext->getApplication();
-		$viewRoot = $this->newBuildView($facesContext, $viewRoot, $viewId);
+		return $this->getViewRootCache($facesContext, $viewRoot);
+	} 
+	
+	private function getViewRootCache(FacesContext $facesContext, UIViewRoot $viewToRender) {
+		$viewId = $viewToRender->getViewId();
+		$viewIdChache = "_viewId".str_replace("/", "_", $viewId);
+		$cachedViewRoot = Cache::getInstance()->fetch($viewIdChache);
+		if($cachedViewRoot) {
+			$viewRoot = $cachedViewRoot;
+		} else {
+			$viewRoot = $this->newBuildView($facesContext, $viewToRender, $viewId);
+			Cache::getInstance()->save($viewIdChache, $viewRoot);
+		}
 		return $viewRoot;
 	} 
 	
@@ -84,8 +98,9 @@ class FaceletsViewHandler extends ViewHandler {
 		$writer->setIndent(TRUE);
 		$writer->text('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">');
-		$viewToRender->getChildren()->clear();
-		$viewToRender = $this->newBuildView($facesContext, $viewToRender, $viewToRender->getViewId());
+		//$viewToRender->getChildren()->clear();
+		//$viewToRender = $this->newBuildView($facesContext, $viewToRender, $viewToRender->getViewId());
+		$viewToRender = $this->getViewRootCache($facesContext, $viewToRender);
 		UIViewRootRenderer::encodeRecursive($facesContext, $viewToRender);
 		$writer->endDocument();
 		$output = $writer->outputMemory(true);
@@ -369,7 +384,7 @@ class FaceletsViewHandler extends ViewHandler {
 		<script type='text/javascript' src='".$context."js/jquery-1.6.2.js'></script>
 		<script type='text/javascript' src='".$context."js/jquery-ui-1.8.16.custom.js'></script>
 		<script type='text/javascript' src='".$context."js/jquery.ui.datepicker-pt-BR.js'></script>
-		<script type='text/javascript' src='".$context."js/seam.js'></script>
+		<script type='text/javascript' src='".$context."js/phpx.js'></script>
 		
 		<link rel='stylesheet' type='text/css' href='".$context."css/smoothness/jquery-ui-1.8.16.custom.css' />
 		";

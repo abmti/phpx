@@ -47,7 +47,44 @@
 								<h:outputText value="#{_usuario.codigo}" />
 							</h:column>
 
+							<h:column>
+								<f:facet name="header">
+									Nome
+								</f:facet>
+								<h:outputText value="#{_usuario.nome}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									UF
+								</f:facet>
+								<h:outputText value="#{_usuario.uf}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									Login
+								</f:facet>
+								<h:outputText value="#{_usuario.login}" />
+							</h:column>
 							
+							<h:column>
+								<f:facet name="header">
+									Perfil
+								</f:facet>
+								<h:outputText value="#{_usuario.perfilLabel}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									Ação
+								</f:facet>
+								<h:commandLink id="linkEdit" action="#{usuarioHome.edit(_usuario.codigo)}" value="Alterar" />
+								|
+								<h:commandLink id="linkEditSenha" action="#{usuarioHome.editSenha(_usuario.codigo)}" value="Alterar Senha" />
+								|
+								<h:commandLink id="linkRemove" action="#{usuarioHome.remove(_usuario.codigo)}" value="Remover" onclick="javascript:return confirm('Deseja realmente excluir?');" />
+							</h:column>
 						</h:dataTable>
 					</h:form>
 				</div>

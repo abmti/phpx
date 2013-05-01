@@ -1,5 +1,5 @@
 
-function AjaxSeam(form, options) {
+function ajaxPhpx(form, options) {
 	if(options["status"]){
 		$('#dialogAjaxStatus').dialog('open');
 	}
@@ -26,7 +26,7 @@ function AjaxSeam(form, options) {
 				//var string = (new XMLSerializer()).serializeToString(data);
 				//alert(string);
 		
-				var reRenders = options['reRender'];
+				var reRenders = options['update'];
 				if(reRenders != null){
 					for(key in reRenders) {
 						var reRender = reRenders[key];

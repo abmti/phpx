@@ -44,7 +44,7 @@ class UIAjax extends UIComponentBase {
 
     private $action;
 	private $event;
-	private $reRender;
+	private $update;
 	private $ajaxSingle;
 	private $status;
 	private $immediate;
@@ -78,12 +78,12 @@ class UIAjax extends UIComponentBase {
 		$this->event = $event;
 	}
 
-	public function getReRender() {
-		return $this->reRender;
+	public function getUpdate() {
+		return $this->update;
 	}
 
-	public function setReRender($reRender) {
-		$this->reRender = $reRender;
+	public function setUpdate($update) {
+		$this->update = $update;
 	}
 
 	public function isAjaxSingle() {

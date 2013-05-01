@@ -30,7 +30,7 @@
 					Action
 				</f:facet>
 				<h:commandLink id="linkRemove" value="Remove">
-					<f:ajax event="onclick" action="#{personBean.removerPerson(_person.name)}" reRender="tablePerson" />
+					<f:ajax event="click" action="#{personBean.removerPerson(_person.name)}" update="tablePerson" />
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>
