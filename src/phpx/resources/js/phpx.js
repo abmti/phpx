@@ -21,8 +21,8 @@ function ajaxPhpx(form, options) {
 	//alert(params);
 	jQuery.post(url, 
 			params,
-			function(data){
-				
+			function(data, textStatus, jqXHR){
+		
 				//var string = (new XMLSerializer()).serializeToString(data);
 				//alert(string);
 		
@@ -32,8 +32,8 @@ function ajaxPhpx(form, options) {
 						var reRender = reRenders[key];
 						$(data).find("#"+reRender).each(function (index, domEle) {
 					        // domEle == this
-							alert($(domEle).attr('id'));
-							alert($(domEle).html());
+							//alert($(domEle).attr('id'));
+							//alert($(domEle).html());
 							$(document).find('#'+reRender).html($(domEle).html());
 					    });
 					}
@@ -44,8 +44,15 @@ function ajaxPhpx(form, options) {
                 }
 			},
 			"xml")
-			.error(function() {})
-			.complete(function() { 
+			.fail(function(xhr, textStatus, error){
+				console.log(xhr);
+				console.log(textStatus);
+				console.log(error);
+			})
+			.done(function(data, textStatus, xhr) { 
+				//console.log(data);
+				//console.log(textStatus);
+				//console.log(xhr);
 				if(options["status"]){
 					$('#dialogAjaxStatus').dialog('close');
 				}
