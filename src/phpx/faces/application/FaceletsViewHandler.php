@@ -67,10 +67,11 @@ class FaceletsViewHandler extends ViewHandler {
 	private function getViewRootCache(FacesContext $facesContext, UIViewRoot $viewToRender) {
 		$viewId = $viewToRender->getViewId();
 		$viewIdChache = "_viewId".str_replace("/", "_", $viewId);
-		$cachedViewRoot = Cache::getInstance()->fetch($viewIdChache);
+		$cachedViewRoot = Cache::getInstance()->fetch($viewIdChache.'-dev');
 		if($cachedViewRoot) {
 			$viewRoot = $cachedViewRoot;
 		} else {
+			$viewToRender->getChildren()->clear();
 			$viewRoot = $this->newBuildView($facesContext, $viewToRender, $viewId);
 			Cache::getInstance()->save($viewIdChache, $viewRoot);
 		}
@@ -381,12 +382,12 @@ class FaceletsViewHandler extends ViewHandler {
 		$context = Path::getInstance()->getPath("CONTEXT_RESOURCES") . "/";
 		$headers = 
 		"<head>
-		<script type='text/javascript' src='".$context."js/jquery-1.6.2.js'></script>
-		<script type='text/javascript' src='".$context."js/jquery-ui-1.8.16.custom.js'></script>
+		<script type='text/javascript' src='".$context."js/jquery-1.9.1.js'></script>
+		<script type='text/javascript' src='".$context."js/jquery-ui-1.10.3.custom.js'></script>
 		<script type='text/javascript' src='".$context."js/jquery.ui.datepicker-pt-BR.js'></script>
 		<script type='text/javascript' src='".$context."js/phpx.js'></script>
 		
-		<link rel='stylesheet' type='text/css' href='".$context."css/smoothness/jquery-ui-1.8.16.custom.css' />
+		<link rel='stylesheet' type='text/css' href='".$context."css/smoothness/jquery-ui-1.10.3.custom.css' />
 		";
 		return str_replace("<head>", $headers, $output);
 	}
