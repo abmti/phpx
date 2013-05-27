@@ -118,4 +118,11 @@
         </component>
     </tag>
     
+    <tag>
+        <tag-name>fragment</tag-name>
+        <component>
+            <component-type>php.faces.HtmlOutputText</component-type>
+        </component>
+    </tag>
+    
 </facelet-taglib>
