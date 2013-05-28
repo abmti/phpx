@@ -2,6 +2,7 @@
 <faces-config>
 
 	<application>
+		<!--<project-stage>Production</project-stage>-->
 		<view-handler>phpx\faces\application\FaceletsViewHandler</view-handler>
 		<navigation-handler>phpx\faces\application\NavigationHandlerImpl</navigation-handler>
 	</application>

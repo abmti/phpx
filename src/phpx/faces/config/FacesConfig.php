@@ -9,19 +9,17 @@ use Exception;
 class FacesConfig {
 	
 	public $path;
-	
 	public $requireFiles;
 	public $managedBeans;
 	public $navigationRules;
-	
 	public $navigationHandlers;
 	public $viewHandlers;
 	public $phaseListeners;
+	public $projectStage;
 	
 	private $renderKitEntries;
 	private $componentEntries;
 	private $converterEntries;
-
 	private $logger;
 	
 	/**
@@ -99,6 +97,12 @@ class FacesConfig {
 							if( $configXml->nodeType == XMLReader::ELEMENT ) {
 								$viewHandler  = trim( $configXml->readString() );
 								$this->viewHandlers[] = $viewHandler;
+							}
+							break;
+						case "project-stage":
+							if( $configXml->nodeType == XMLReader::ELEMENT ) {
+								$stage = trim( $configXml->readString() );
+								$this->projectStage = $stage;
 							}
 							break;
 							
@@ -435,7 +439,15 @@ class FacesConfig {
 	public function getRenderKitEntries() {
 		return $this->renderKitEntries;	
 	}
-	
+
+	public function getProjectStage() {
+		return $this->projectStage;
+	}
+
+	public function setProjectStage($projectStage) {
+		$this->projectStage = $projectStage;
+	}
+
 }
 
 ?>

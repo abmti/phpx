@@ -8,6 +8,7 @@ use Exception;
 
 class Application {
 
+	private $projectStage;
 	private $viewHandler;
 	private $navigationHandler;
 	private $componentMap = array();
@@ -83,7 +84,15 @@ class Application {
 	public function setActionListener($actionListener) {
 		$this->actionListener = $actionListener;
 	}
-	
+
+	public function getProjectStage() {
+		return $this->projectStage;
+	}
+
+	public function setProjectStage($projectStage) {
+		$this->projectStage = $projectStage;
+	}
+
 }
 
 ?>

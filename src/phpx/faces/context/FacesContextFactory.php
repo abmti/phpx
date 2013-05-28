@@ -91,7 +91,8 @@ class FacesContextFactory {
 		
 		$facesContext = new FacesContext();
 		$application = $facesContext->getApplication();
-
+		$application->setProjectStage($config->getProjectStage());
+		
 		//
 		// Handle Navigation
 		// create it with support for decoration

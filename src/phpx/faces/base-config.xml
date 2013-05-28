@@ -4,12 +4,9 @@
 
 	<!-- DTD reference: http://www.horstmann.com/corejsf/faces-config.html -->
 
-	<!-- renderer: (description*, display-name*, icon*, component-family, renderer-type, 
-		renderer-class, attribute*, supported-component-type*, supported-component-class*, 
-		renderer-extension*) -->
-	<!-- render-kit: (description*, display-name*, icon*, render-kit-id?, render-kit-class?, 
-		renderer*) -->
-
+	<application>
+		<project-stage>Development</project-stage>
+	</application>
 
 	<!-- ==================================================================== 
 		HTML Render Kit ==================================================================== -->

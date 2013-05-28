@@ -2,18 +2,13 @@
 
 namespace phpx\faces\application;
 
+use phpx\faces\application\ProjectStage;
 use phpx\util\Cache;
-
 use phpx\faces\component\UIFacet;
-
 use phpx\faces\component\UIForm;
-
 use phpx\faces\component\UIDefine;
-
 use phpx\faces\component\UIInsert;
-
 use phpx\faces\component\UIHtml;
-
 use phpx\util\ArrayList;
 use phpx\faces\config\TaglibEntry;
 use phpx\util\NewXmlReader;
@@ -67,10 +62,11 @@ class FaceletsViewHandler extends ViewHandler {
 	private function getViewRootCache(FacesContext $facesContext, UIViewRoot $viewToRender) {
 		$viewId = $viewToRender->getViewId();
 		$viewIdChache = "_viewId".str_replace("/", "_", $viewId);
-		$cachedViewRoot = Cache::getInstance()->fetch($viewIdChache.'-dev');
-		if($cachedViewRoot) {
-			$viewRoot = $cachedViewRoot;
-		} else {
+		$viewRoot = null;
+		if($facesContext->getApplication()->getProjectStage() == ProjectStage::PRODUCTION) {
+			$viewRoot = Cache::getInstance()->fetch($viewIdChache);
+		}
+		if($viewRoot == null) {
 			$viewToRender->getChildren()->clear();
 			$viewRoot = $this->newBuildView($facesContext, $viewToRender, $viewId);
 			Cache::getInstance()->save($viewIdChache, $viewRoot);
